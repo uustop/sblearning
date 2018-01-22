@@ -23,15 +23,19 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class HelloController {
 
-    @RequestMapping("/hello")
-    public String hello() throws Exception {
-        throw new Exception("发生错误");
+    @RequestMapping("/")
+    public String index() {
+        return "index";
     }
 
-    @RequestMapping("/")
-    public String index(ModelMap map) {
-        map.addAttribute("host", "http://www.uustop.com");
-        return "index";
+    @RequestMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @RequestMapping("/json")
