@@ -1,5 +1,6 @@
 package com.uustop.sblearning;
 
+import com.uustop.sblearning.rabbitmq.Sender;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,31 +20,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class SblearningApplicationTests {
 
+
+
 	@Autowired
-	private BlogProperties blogProperties;
+	private Sender sender;
 
 	@Test
-	public void contextLoads() {
+	public void hello() throws Exception {
+		sender.send();
 	}
-	private MockMvc mvc;
-
-	@Before
-	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.standaloneSetup(new HelloController()).build();
-	}
-
-	@Test
-	public void getHello() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(content().string(equalTo("Hello World")));
-	}
-
-	@Test
-	public  void  getProperties() throws Exception{
-		Assert.assertEquals(blogProperties.getName(),"uustop");
-
-		Assert.assertEquals(blogProperties.getTitle(),"Spring Boot教程");
-	}
-
 }
